@@ -3,6 +3,7 @@ import JSONEditor from './Components/JSONEditor';
 import FormGenerator from './Components/FormGenerator';
 import { FormSchema } from './utils/schemaTypes';
 import './index.css';
+import "toastr/build/toastr.min.css";
 
 const App: React.FC = () => {
   const [schema, setSchema] = useState<FormSchema | null>(null);

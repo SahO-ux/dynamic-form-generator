@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { FormSchema } from '../utils/schemaTypes';
-import MonacoEditor from '@monaco-editor/react';
+import React, { useState } from "react";
+import { FormSchema } from "../utils/schemaTypes";
+import MonacoEditor from "@monaco-editor/react";
+import toastr from "toastr";
 
 interface JSONEditorProps {
   schema: FormSchema | null;
@@ -8,7 +9,11 @@ interface JSONEditorProps {
   setError: (error: string | null) => void;
 }
 
-const JSONEditor: React.FC<JSONEditorProps> = ({ schema, setSchema, setError }) => {
+const JSONEditor: React.FC<JSONEditorProps> = ({
+  schema,
+  setSchema,
+  setError,
+}) => {
   const [editorValue, setEditorValue] = useState<string>(
     JSON.stringify(schema, null, 2)
   );
@@ -22,13 +27,13 @@ const JSONEditor: React.FC<JSONEditorProps> = ({ schema, setSchema, setError }) 
       setSchema(parsedSchema);
       setError(null); // Clear errors on valid JSON
     } catch (error) {
-      setError('Invalid JSON format');
+      setError("Invalid JSON format");
     }
   };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(editorValue);
-    alert('Form JSON copied to clipboard!');
+    toastr.success("Form JSON copied to clipboard!");
   };
 
   return (
