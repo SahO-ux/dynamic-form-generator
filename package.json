@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@monaco-editor/react": "^4.6.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
@@ -12,6 +13,7 @@
     "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "autoprefixer": "^10.4.20",
+    "dotenv": "^16.4.5",
     "postcss": "^8.4.49",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -26,6 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "e2e": "npx playwright test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,8 +50,10 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.48.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "playwright": "^1.48.2"
   }
 }
