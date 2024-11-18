@@ -26,16 +26,16 @@ const FormGenerator: React.FC<FormGeneratorProps> = ({ schema }) => {
     link.download = 'form-submission.json';
     link.click();
   };
-  
 
-  if (!schema || !schema.fields) {
+  if (!schema || !schema?.fields) {
+    toastr.error("No valid form schema provided.");
     return <p>No form schema provided.</p>;
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h2 className="text-2xl font-bold">{schema.formTitle}</h2>
-      <p className="mb-4">{schema.formDescription}</p>
+      <h2 className="text-2xl font-bold">{schema.formTitle || "Form"}</h2>
+      <p className="mb-4">{schema.formDescription || ""}</p>
 
       {schema.fields.map((field) => (
         <div key={field.id} className="flex flex-col">

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+
 import JSONEditor from './Components/JSONEditor';
 import FormGenerator from './Components/FormGenerator';
 import { FormSchema } from './utils/schemaTypes';
 import './index.css';
 import "toastr/build/toastr.min.css";
+import { initialSchemaValue } from './utils/constants';
 
 const App: React.FC = () => {
-  const [schema, setSchema] = useState<FormSchema | null>(null);
+  const [schema, setSchema] = useState<FormSchema | any>(initialSchemaValue);
   const [error, setError] = useState<string | null>(null);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -22,7 +24,7 @@ const App: React.FC = () => {
               onClick={toggleDarkMode}
               className="bg-gray-300 dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded"
             >
-              Toggle {darkMode ? 'Light' : 'Dark'} Mode
+              Enable {darkMode ? 'Light' : 'Dark'} Mode
             </button>
           </div>
           <JSONEditor schema={schema} setSchema={setSchema} setError={setError} />

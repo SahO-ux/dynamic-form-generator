@@ -9,6 +9,24 @@ interface JSONEditorProps {
   setError: (error: string | null) => void;
 }
 
+const validateSchema = (schema: any): boolean => {
+  if (!schema || typeof schema !== "object") {
+    toastr.error("Schema must be a valid JSON object.");
+    return false;
+  }
+  if (!schema.fields || !Array.isArray(schema.fields)) {
+    toastr.error("Schema must contain a 'fields' array.");
+    return false;
+  }
+  for (const field of schema.fields) {
+    if (!field.id || !field.type || !field.label) {
+      toastr.error("Each field must have 'id', 'type', and 'label'.");
+      return false;
+    }
+  }
+  return true;
+};
+
 const JSONEditor: React.FC<JSONEditorProps> = ({
   schema,
   setSchema,
@@ -24,10 +42,15 @@ const JSONEditor: React.FC<JSONEditorProps> = ({
     setEditorValue(value);
     try {
       const parsedSchema = JSON.parse(value);
-      setSchema(parsedSchema);
-      setError(null); // Clear errors on valid JSON
+      if (validateSchema(parsedSchema)) {
+        setSchema(parsedSchema);
+        setError(null); // Clear errors on valid schema
+      } else {
+        setSchema(null);
+      }
     } catch (error) {
       setError("Invalid JSON format");
+      toastr.error("Invalid JSON format.");
     }
   };
 
